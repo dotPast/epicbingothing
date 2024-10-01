@@ -46,3 +46,6 @@ bin/
 
 ### runServer Task ###
 run/
+
+### Local Libraries (aka Origami) ###
+libs/
