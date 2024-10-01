@@ -1,0 +1,7 @@
+name: EpicBingoThing
+version: '1.0'
+author: dotPast
+main: hi.dottt.epicbingothing.EpicBingoThing
+description: Yet another bingo plugin
+api-version: '1.21.1'
+bootstrapper: hi.dottt.epicbingothing.EBTBootstrap
