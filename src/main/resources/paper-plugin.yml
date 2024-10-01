@@ -2,6 +2,6 @@ name: EpicBingoThing
 version: '1.0'
 author: dotPast
 main: hi.dottt.epicbingothing.EpicBingoThing
-description: Yet another bingo plugin
+description: Yet Another Minecraft Bingo Plugin
 api-version: '1.21.1'
 bootstrapper: hi.dottt.epicbingothing.EBTBootstrap
