@@ -18,6 +18,7 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:1.21.1-R0.1-SNAPSHOT")
     implementation("org.jetbrains.kotlin:kotlin-stdlib")
 
+    implementation(files("libs/origami.engine.jar"))
     implementation("org.jetbrains.kotlin:kotlin-reflect:2.0.20")
     api("com.github.AsoDesu.Origami:bukkit:-SNAPSHOT")
     api("com.github.AsoDesu.Origami:commands:-SNAPSHOT")
