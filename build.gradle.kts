@@ -12,6 +12,7 @@ repositories {
     maven("https://repo.papermc.io/repository/maven-public/")
     maven("https://oss.sonatype.org/content/groups/public/")
     maven("https://jitpack.io")
+    maven("https://maven.noxcrew.com/public")
 }
 
 dependencies {
@@ -24,6 +25,8 @@ dependencies {
     api("com.github.AsoDesu.Origami:commands:-SNAPSHOT")
     api("com.github.AsoDesu.Origami:common:-SNAPSHOT")
     api("com.github.AsoDesu.Origami:designs:-SNAPSHOT")
+
+    implementation("com.noxcrew.interfaces:interfaces:1.3.1-SNAPSHOT")
 }
 
 kotlin {
