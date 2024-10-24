@@ -1,5 +1,8 @@
 package hi.dottt.epicbingothing
 
+import com.mojang.brigadier.context.CommandContext
+import hi.dottt.epicbingothing.commands.ShowCardCommand
+import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
 import io.papermc.paper.plugin.bootstrap.BootstrapContext
 import io.papermc.paper.plugin.bootstrap.PluginBootstrap
@@ -14,7 +17,11 @@ class EBTBootstrap : PluginBootstrap {
             LifecycleEvents.COMMANDS
         ) { event: ReloadableRegistrarEvent<Commands?> ->
             val commands = event.registrar()
-
+            commands!!.register(
+                Commands.literal("card").executes { ctx: CommandContext<CommandSourceStack> ->
+                    ShowCardCommand().execute(ctx)
+                }.build()
+            )
         }
     }
 }
