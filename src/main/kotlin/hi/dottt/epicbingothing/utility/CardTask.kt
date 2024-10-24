@@ -2,15 +2,16 @@ package hi.dottt.epicbingothing.utility
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
+import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
 class CardTask(
     val id: String,
     val type: TYPE,
-    val displayName: String,
-    val description: String,
-    val icon: ItemStack,
-    val difficulty: DIFFICULTY,
+    val displayName: String = "Default Name",
+    val description: String = "Default Description",
+    val icon: ItemStack = ItemStack(Material.DIAMOND),
+    val difficulty: DIFFICULTY = DIFFICULTY.EASY,
     val completed: Boolean = false
 ) {
     fun getItemDisplay(): ItemStack {
