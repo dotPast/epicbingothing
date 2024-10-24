@@ -41,11 +41,11 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.STATISTICS,
+                        CardTask.TYPE.ODDBALL,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.DIAMOND, 1),
-                        CardTask.DIFFICULTY.HARD,
+                        CardTask.DIFFICULTY.GOOD_LUCK_GETTING_THIS_ONE,
                         true
                     ),
                     CardTask(
@@ -87,11 +87,11 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.STATISTICS,
+                        CardTask.TYPE.ODDBALL,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.GOLD_INGOT, 8),
-                        CardTask.DIFFICULTY.HARD,
+                        CardTask.DIFFICULTY.GOOD_LUCK_GETTING_THIS_ONE,
                         true
                     ),
                     CardTask(
@@ -133,11 +133,11 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.STATISTICS,
+                        CardTask.TYPE.ODDBALL,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.IRON_INGOT, 16),
-                        CardTask.DIFFICULTY.HARD,
+                        CardTask.DIFFICULTY.GOOD_LUCK_GETTING_THIS_ONE,
                         true
                     ),
                     CardTask(
@@ -179,11 +179,11 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.STATISTICS,
+                        CardTask.TYPE.ODDBALL,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.COPPER_INGOT, 32),
-                        CardTask.DIFFICULTY.HARD,
+                        CardTask.DIFFICULTY.GOOD_LUCK_GETTING_THIS_ONE,
                         true
                     ),
                     CardTask(
@@ -225,11 +225,11 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.STATISTICS,
+                        CardTask.TYPE.ODDBALL,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.AMETHYST_SHARD, 64),
-                        CardTask.DIFFICULTY.HARD,
+                        CardTask.DIFFICULTY.GOOD_LUCK_GETTING_THIS_ONE,
                         true
                     ),
                     CardTask(
