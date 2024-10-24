@@ -27,6 +27,8 @@ dependencies {
     api("com.github.AsoDesu.Origami:designs:-SNAPSHOT")
 
     implementation("com.noxcrew.interfaces:interfaces:1.3.1-SNAPSHOT")
+
+    implementation("net.kyori:adventure-text-serializer-plain:4.17.0")
 }
 
 kotlin {
