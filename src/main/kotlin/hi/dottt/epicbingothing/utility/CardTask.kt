@@ -75,7 +75,7 @@ class CardTask(
 
     enum class TYPE(val displayName: String, val color: TextColor) {
         ITEM("Item", TextColor.color(0xffbf00)),
-        ACHIEVEMENTS("Achievements", TextColor.color(0x88ff4d)),
+        ADVANCEMENTS("Advancements", TextColor.color(0x88ff4d)),
         ODDBALL("Oddball", TextColor.color(0xc067ff)),
     }
 }

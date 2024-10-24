@@ -32,7 +32,7 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.ACHIEVEMENTS,
+                        CardTask.TYPE.ADVANCEMENTS,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.DIAMOND, 1),
@@ -78,7 +78,7 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.ACHIEVEMENTS,
+                        CardTask.TYPE.ADVANCEMENTS,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.GOLD_INGOT, 8),
@@ -124,7 +124,7 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.ACHIEVEMENTS,
+                        CardTask.TYPE.ADVANCEMENTS,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.IRON_INGOT, 16),
@@ -170,7 +170,7 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.ACHIEVEMENTS,
+                        CardTask.TYPE.ADVANCEMENTS,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.COPPER_INGOT, 32),
@@ -216,7 +216,7 @@ class ShowCardCommand {
                     ),
                     CardTask(
                         "test",
-                        CardTask.TYPE.ACHIEVEMENTS,
+                        CardTask.TYPE.ADVANCEMENTS,
                         "Test Task",
                         "Test Task Description",
                         ItemStack(Material.AMETHYST_SHARD, 64),
