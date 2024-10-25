@@ -2,7 +2,10 @@ package hi.dottt.epicbingothing.utility
 
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
+import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
 
 class CardTask(
@@ -17,6 +20,47 @@ class CardTask(
     fun getItemDisplay(): ItemStack {
         val display = ItemStack(icon)
         val displayMeta = display.itemMeta
+
+        if (displayName.isEmpty()) {
+            displayName = when (type) {
+                TYPE.ITEM -> {
+                    val plainTextName = PlainTextComponentSerializer.plainText().serialize(icon.displayName())
+
+                    if (icon.type != Material.getMaterial(id)) {
+                        if (icon.amount == 1) {
+                            when (plainTextName[2]) {
+                                'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' -> "Get a ${
+                                    plainTextName.subSequence(
+                                        1,
+                                        plainTextName.length - 1
+                                    )
+                                }"
+
+                                else -> "Get an ${plainTextName.subSequence(1, plainTextName.length - 1)}"
+                            }
+                        } else {
+                            "Get ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
+                        }
+                    } else {
+                        "Get an Unknown Item"
+                    }
+                }
+
+                TYPE.ADVANCEMENTS -> {
+                    val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
+
+                    if (advancement == null || id == "default") {
+                        "Get an Unknown Advancement"
+                    } else {
+                        val plainTextName = PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
+                        "Get the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" Advancement"
+                    }
+                }
+                TYPE.ODDBALL -> {
+                    "Complete a Missing Task"
+                }
+            }
+        }
 
         displayMeta.displayName(
             Component.text(displayName)

@@ -23,7 +23,7 @@ class ShowCardCommand {
             val items = listOf(
                 listOf(
                     CardTask(
-                        "test",
+                        "diamond",
                         CardTask.TYPE.ITEM,
                         description = "Test Task Description",
                         icon = ItemStack(Material.DIAMOND, 1),
@@ -33,16 +33,15 @@ class ShowCardCommand {
                     CardTask(
                         "test",
                         CardTask.TYPE.ADVANCEMENTS,
-                        "Test Task",
-                        "Test Task Description",
-                        ItemStack(Material.DIAMOND, 1),
-                        CardTask.DIFFICULTY.NORMAL,
-                        true
+                        description = "Test Task Description",
+                        icon = ItemStack(Material.EXPERIENCE_BOTTLE, 1),
+                        difficulty = CardTask.DIFFICULTY.NORMAL,
+                        completed = true
                     ),
                     CardTask(
                         "test",
                         CardTask.TYPE.ODDBALL,
-                        "Test Task",
+                        "",
                         "Test Task Description",
                         ItemStack(Material.DIAMOND, 1),
                         CardTask.DIFFICULTY.HARD,
@@ -69,7 +68,7 @@ class ShowCardCommand {
                 ),
                 listOf(
                     CardTask(
-                        "test",
+                        "gold_ingot",
                         CardTask.TYPE.ITEM,
                         description = "Test Task Description",
                         icon = ItemStack(Material.GOLD_INGOT, 8),
@@ -77,18 +76,17 @@ class ShowCardCommand {
                         completed = true
                     ),
                     CardTask(
-                        "test",
+                        "adventure/sleep_in_bed",
                         CardTask.TYPE.ADVANCEMENTS,
-                        "Test Task",
-                        "Test Task Description",
-                        ItemStack(Material.GOLD_INGOT, 8),
-                        CardTask.DIFFICULTY.NORMAL,
-                        true
+                        description = "Test Task Description",
+                        icon = ItemStack(Material.EXPERIENCE_BOTTLE, 1),
+                        difficulty = CardTask.DIFFICULTY.NORMAL,
+                        completed = true
                     ),
                     CardTask(
                         "test",
                         CardTask.TYPE.ODDBALL,
-                        "Test Task",
+                        "",
                         "Test Task Description",
                         ItemStack(Material.GOLD_INGOT, 8),
                         CardTask.DIFFICULTY.HARD,
@@ -115,7 +113,7 @@ class ShowCardCommand {
                 ),
                 listOf(
                     CardTask(
-                        "test",
+                        "iron_ingot",
                         CardTask.TYPE.ITEM,
                         description = "Test Task Description",
                         icon = ItemStack(Material.IRON_INGOT, 16),
@@ -123,18 +121,17 @@ class ShowCardCommand {
                         completed = true
                     ),
                     CardTask(
-                        "test",
+                        "adventure/sleep_in_bed",
                         CardTask.TYPE.ADVANCEMENTS,
-                        "Test Task",
-                        "Test Task Description",
-                        ItemStack(Material.IRON_INGOT, 16),
-                        CardTask.DIFFICULTY.NORMAL,
-                        true
+                        description = "Test Task Description",
+                        icon = ItemStack(Material.EXPERIENCE_BOTTLE, 1),
+                        difficulty = CardTask.DIFFICULTY.NORMAL,
+                        completed = true
                     ),
                     CardTask(
                         "test",
                         CardTask.TYPE.ODDBALL,
-                        "Test Task",
+                        "",
                         "Test Task Description",
                         ItemStack(Material.IRON_INGOT, 16),
                         CardTask.DIFFICULTY.HARD,
@@ -161,7 +158,7 @@ class ShowCardCommand {
                 ),
                 listOf(
                     CardTask(
-                        "test",
+                        "copper_ingot",
                         CardTask.TYPE.ITEM,
                         description = "Test Task Description",
                         icon = ItemStack(Material.COPPER_INGOT, 32),
@@ -169,18 +166,17 @@ class ShowCardCommand {
                         completed = true
                     ),
                     CardTask(
-                        "test",
+                        "adventure/sleep_in_bed",
                         CardTask.TYPE.ADVANCEMENTS,
-                        "Test Task",
-                        "Test Task Description",
-                        ItemStack(Material.COPPER_INGOT, 32),
-                        CardTask.DIFFICULTY.NORMAL,
-                        true
+                        description = "Test Task Description",
+                        icon = ItemStack(Material.EXPERIENCE_BOTTLE, 1),
+                        difficulty = CardTask.DIFFICULTY.NORMAL,
+                        completed = true
                     ),
                     CardTask(
                         "test",
                         CardTask.TYPE.ODDBALL,
-                        "Test Task",
+                        "",
                         "Test Task Description",
                         ItemStack(Material.COPPER_INGOT, 32),
                         CardTask.DIFFICULTY.HARD,
@@ -207,7 +203,7 @@ class ShowCardCommand {
                 ),
                 listOf(
                     CardTask(
-                        "test",
+                        "amethyst_shard",
                         CardTask.TYPE.ITEM,
                         description = "Test Task Description",
                         icon = ItemStack(Material.AMETHYST_SHARD, 64),
@@ -215,18 +211,17 @@ class ShowCardCommand {
                         completed = true
                     ),
                     CardTask(
-                        "test",
+                        "adventure/sleep_in_bed",
                         CardTask.TYPE.ADVANCEMENTS,
-                        "Test Task",
-                        "Test Task Description",
-                        ItemStack(Material.AMETHYST_SHARD, 64),
-                        CardTask.DIFFICULTY.NORMAL,
-                        true
+                        description = "Test Task Description",
+                        icon = ItemStack(Material.EXPERIENCE_BOTTLE, 1),
+                        difficulty = CardTask.DIFFICULTY.NORMAL,
+                        completed = true
                     ),
                     CardTask(
                         "test",
                         CardTask.TYPE.ODDBALL,
-                        "Test Task",
+                        "",
                         "Test Task Description",
                         ItemStack(Material.AMETHYST_SHARD, 64),
                         CardTask.DIFFICULTY.HARD,
