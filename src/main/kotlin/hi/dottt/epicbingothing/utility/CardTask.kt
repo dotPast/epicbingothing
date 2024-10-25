@@ -32,13 +32,15 @@ class CardTask(
                             "❌ Not Completed"
                         }
                     )
-                        .color(TextColor.color(
-                            if (completed) {
-                                0x88ff4d
-                            } else {
-                                0xff4d4d
-                            }
-                        ))
+                        .color(
+                            TextColor.color(
+                                if (completed) {
+                                    0x88ff4d
+                                } else {
+                                    0xff4d4d
+                                }
+                            )
+                        )
                 )
         )
 
