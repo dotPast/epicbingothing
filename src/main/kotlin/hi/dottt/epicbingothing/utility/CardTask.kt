@@ -1,5 +1,6 @@
 package hi.dottt.epicbingothing.utility
 
+import io.papermc.paper.advancement.AdvancementDisplay
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
@@ -12,14 +13,24 @@ class CardTask(
     val id: String = "default",
     val type: TYPE = TYPE.ITEM,
     var displayName: String = "",
-    val description: String = "",
-    val icon: ItemStack = ItemStack(Material.PAPER),
+    var description: String = "",
+    var icon: ItemStack = ItemStack(Material.PAPER),
     val difficulty: DIFFICULTY = DIFFICULTY.EASY,
     val completed: Boolean = false
 ) {
     fun getItemDisplay(): ItemStack {
-        val display = ItemStack(icon)
+        var display = ItemStack(icon)
         val displayMeta = display.itemMeta
+
+        if (type == TYPE.ADVANCEMENTS) {
+            val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
+
+            display = if (advancement != null) {
+                advancement.display!!.icon()
+            } else {
+                ItemStack(Material.EXPERIENCE_BOTTLE, 1)
+            }
+        }
 
         if (displayName.isEmpty()) {
             displayName = when (type) {
