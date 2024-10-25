@@ -62,6 +62,36 @@ class CardTask(
             }
         }
 
+        if (description.isEmpty()) {
+            description = when (type) {
+                TYPE.ITEM -> {
+                    val plainTextName = PlainTextComponentSerializer.plainText().serialize(icon.displayName())
+
+                    if (icon.amount == 1) {
+                        "Get a single ${plainTextName.subSequence(1, plainTextName.length - 1)}"
+                    } else {
+                        "Get ${icon.amount} ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
+                    }
+                }
+                TYPE.ADVANCEMENTS -> {
+                    val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
+
+                    if (advancement == null || id == "default") {
+                        "Complete an Unknown Advancement. Please check if the task ID is valid"
+                    } else {
+                        val plainTextName = PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
+                        when (advancement.display!!.frame()) {
+                            AdvancementDisplay.Frame.CHALLENGE -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" challenge"
+                            AdvancementDisplay.Frame.GOAL -> "Reach the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" goal"
+                            AdvancementDisplay.Frame.TASK -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" advancement"
+                            else -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" advancement"
+                        }
+                    }
+                }
+                TYPE.ODDBALL -> "Complete a Missing Task. Please check if the task ID is valid."
+            }
+        }
+
         displayMeta.displayName(
             Component.text(displayName)
                 .color(TextColor.color(this.difficulty.color))
