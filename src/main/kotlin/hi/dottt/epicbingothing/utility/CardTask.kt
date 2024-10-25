@@ -6,11 +6,11 @@ import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
 class CardTask(
-    val id: String,
-    val type: TYPE,
-    val displayName: String = "Default Name",
-    val description: String = "Default Description",
-    val icon: ItemStack = ItemStack(Material.DIAMOND),
+    val id: String = "default",
+    val type: TYPE = TYPE.ITEM,
+    var displayName: String = "",
+    val description: String = "",
+    val icon: ItemStack = ItemStack(Material.PAPER),
     val difficulty: DIFFICULTY = DIFFICULTY.EASY,
     val completed: Boolean = false
 ) {
