@@ -205,7 +205,7 @@ class AddCardsCommand {
             ),
             listOf(
                 CardTask(
-                    "redstone",
+                    "amethyst_shard",
                     CardTask.TYPE.ITEM,
                     iconMaterial = Material.AMETHYST_SHARD,
                     iconAmount = 64,
