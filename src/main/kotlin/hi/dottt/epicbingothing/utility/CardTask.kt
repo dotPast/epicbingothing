@@ -66,10 +66,12 @@ class CardTask(
                     if (advancement == null || id == "default") {
                         "Get an Unknown Advancement"
                     } else {
-                        val plainTextName = PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
+                        val plainTextName =
+                            PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
                         "Get the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" Advancement"
                     }
                 }
+
                 TYPE.ODDBALL -> {
                     "Complete a Missing Task"
                 }
@@ -87,21 +89,47 @@ class CardTask(
                         "Get ${iconAmount} ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
                     }
                 }
+
                 TYPE.ADVANCEMENTS -> {
                     val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
 
                     if (advancement == null || id == "default") {
                         "Complete an Unknown Advancement. Please check if the task ID is valid"
                     } else {
-                        val plainTextName = PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
+                        val plainTextName =
+                            PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
                         when (advancement.display!!.frame()) {
-                            AdvancementDisplay.Frame.CHALLENGE -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" challenge"
-                            AdvancementDisplay.Frame.GOAL -> "Reach the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" goal"
-                            AdvancementDisplay.Frame.TASK -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" advancement"
-                            else -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" advancement"
+                            AdvancementDisplay.Frame.CHALLENGE -> "Complete the \"${
+                                plainTextName.subSequence(
+                                    1,
+                                    plainTextName.length - 1
+                                )
+                            }\" challenge"
+
+                            AdvancementDisplay.Frame.GOAL -> "Reach the \"${
+                                plainTextName.subSequence(
+                                    1,
+                                    plainTextName.length - 1
+                                )
+                            }\" goal"
+
+                            AdvancementDisplay.Frame.TASK -> "Complete the \"${
+                                plainTextName.subSequence(
+                                    1,
+                                    plainTextName.length - 1
+                                )
+                            }\" advancement"
+
+                            else -> "Complete the \"${
+                                plainTextName.subSequence(
+                                    1,
+                                    plainTextName.length - 1
+                                )
+                            }\" advancement"
                         }
                     }
                 }
+
                 TYPE.ODDBALL -> "Complete a Missing Task. Please check if the task ID is valid."
             }
         }
@@ -201,10 +229,12 @@ class CardTask(
                     if (advancement == null || id == "default") {
                         "Get an Unknown Advancement"
                     } else {
-                        val plainTextName = PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
+                        val plainTextName =
+                            PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
                         "Get the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" Advancement"
                     }
                 }
+
                 TYPE.ODDBALL -> {
                     "Complete a Missing Task"
                 }
@@ -222,21 +252,47 @@ class CardTask(
                         "Get ${iconAmount} ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
                     }
                 }
+
                 TYPE.ADVANCEMENTS -> {
                     val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
 
                     if (advancement == null || id == "default") {
                         "Complete an Unknown Advancement. Please check if the task ID is valid"
                     } else {
-                        val plainTextName = PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
+                        val plainTextName =
+                            PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
                         when (advancement.display!!.frame()) {
-                            AdvancementDisplay.Frame.CHALLENGE -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" challenge"
-                            AdvancementDisplay.Frame.GOAL -> "Reach the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" goal"
-                            AdvancementDisplay.Frame.TASK -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" advancement"
-                            else -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" advancement"
+                            AdvancementDisplay.Frame.CHALLENGE -> "Complete the \"${
+                                plainTextName.subSequence(
+                                    1,
+                                    plainTextName.length - 1
+                                )
+                            }\" challenge"
+
+                            AdvancementDisplay.Frame.GOAL -> "Reach the \"${
+                                plainTextName.subSequence(
+                                    1,
+                                    plainTextName.length - 1
+                                )
+                            }\" goal"
+
+                            AdvancementDisplay.Frame.TASK -> "Complete the \"${
+                                plainTextName.subSequence(
+                                    1,
+                                    plainTextName.length - 1
+                                )
+                            }\" advancement"
+
+                            else -> "Complete the \"${
+                                plainTextName.subSequence(
+                                    1,
+                                    plainTextName.length - 1
+                                )
+                            }\" advancement"
                         }
                     }
                 }
+
                 TYPE.ODDBALL -> "Complete a Missing Task. Please check if the task ID is valid."
             }
         }

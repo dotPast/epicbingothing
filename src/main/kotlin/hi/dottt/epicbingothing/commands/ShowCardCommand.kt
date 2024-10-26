@@ -23,7 +23,8 @@ class ShowCardCommand {
 
             val player = ctx.source.sender as Player
 
-            val rawCards = player.persistentDataContainer.get(NamespacedKey("bingo", "rows"), PersistentDataType.LIST.strings())
+            val rawCards =
+                player.persistentDataContainer.get(NamespacedKey("bingo", "rows"), PersistentDataType.LIST.strings())
             var items: MutableList<List<CardTask>> = mutableListOf()
 
             for (row in rawCards) {

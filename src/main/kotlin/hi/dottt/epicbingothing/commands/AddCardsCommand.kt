@@ -27,24 +27,24 @@ class AddCardsCommand {
                     iconMaterial = Material.DIAMOND,
                     iconAmount = 1,
                     difficulty = CardTask.DIFFICULTY.EASY,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ADVANCEMENTS,
                     iconMaterial = Material.EXPERIENCE_BOTTLE,
                     iconAmount = 1,
                     difficulty = CardTask.DIFFICULTY.NORMAL,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
                     iconMaterial = Material.DIAMOND,
                     iconAmount = 1,
                     difficulty = CardTask.DIFFICULTY.HARD,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
@@ -53,8 +53,8 @@ class AddCardsCommand {
                     Material.DIAMOND,
                     1,
                     CardTask.DIFFICULTY.GOOD_LUCK_GETTING_THIS_ONE,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
@@ -73,8 +73,8 @@ class AddCardsCommand {
                     iconMaterial = Material.GOLD_INGOT,
                     iconAmount = 8,
                     difficulty = CardTask.DIFFICULTY.EASY,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "adventure/sleep_in_bed",
                     CardTask.TYPE.ADVANCEMENTS,
@@ -89,8 +89,8 @@ class AddCardsCommand {
                     iconMaterial = Material.GOLD_INGOT,
                     iconAmount = 8,
                     difficulty = CardTask.DIFFICULTY.HARD,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
@@ -99,8 +99,8 @@ class AddCardsCommand {
                     iconMaterial = Material.GOLD_INGOT,
                     iconAmount = 8,
                     CardTask.DIFFICULTY.GOOD_LUCK_GETTING_THIS_ONE,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
@@ -119,24 +119,24 @@ class AddCardsCommand {
                     iconMaterial = Material.IRON_INGOT,
                     iconAmount = 16,
                     difficulty = CardTask.DIFFICULTY.EASY,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "adventure/overoverkill",
                     CardTask.TYPE.ADVANCEMENTS,
                     iconMaterial = Material.EXPERIENCE_BOTTLE,
                     iconAmount = 1,
                     difficulty = CardTask.DIFFICULTY.NORMAL,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
                     iconMaterial = Material.IRON_INGOT,
                     iconAmount = 16,
                     difficulty = CardTask.DIFFICULTY.HARD,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
@@ -145,8 +145,8 @@ class AddCardsCommand {
                     Material.IRON_INGOT,
                     16,
                     CardTask.DIFFICULTY.GOOD_LUCK_GETTING_THIS_ONE,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
@@ -165,24 +165,24 @@ class AddCardsCommand {
                     iconMaterial = Material.COPPER_INGOT,
                     iconAmount = 32,
                     difficulty = CardTask.DIFFICULTY.EASY,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "nether/create_full_beacon",
                     CardTask.TYPE.ADVANCEMENTS,
                     iconMaterial = Material.EXPERIENCE_BOTTLE,
                     iconAmount = 1,
                     difficulty = CardTask.DIFFICULTY.NORMAL,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
                     iconMaterial = Material.COPPER_INGOT,
                     iconAmount = 32,
                     difficulty = CardTask.DIFFICULTY.HARD,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
@@ -210,8 +210,8 @@ class AddCardsCommand {
                     iconMaterial = Material.AMETHYST_SHARD,
                     iconAmount = 64,
                     difficulty = CardTask.DIFFICULTY.EASY,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "adventure/sleep_in_bed",
                     CardTask.TYPE.ADVANCEMENTS,
@@ -225,8 +225,8 @@ class AddCardsCommand {
                     iconMaterial = Material.AMETHYST_SHARD,
                     iconAmount = 64,
                     difficulty = CardTask.DIFFICULTY.HARD,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
@@ -235,8 +235,8 @@ class AddCardsCommand {
                     Material.AMETHYST_SHARD,
                     64,
                     CardTask.DIFFICULTY.GOOD_LUCK_GETTING_THIS_ONE,
-                    
-                ),
+
+                    ),
                 CardTask(
                     "test",
                     CardTask.TYPE.ODDBALL,
@@ -257,7 +257,11 @@ class AddCardsCommand {
             serialized.add(Json.encodeToString(row))
         }
 
-        player.persistentDataContainer.set(NamespacedKey("bingo", "rows"), PersistentDataType.LIST.strings(), serialized)
+        player.persistentDataContainer.set(
+            NamespacedKey("bingo", "rows"),
+            PersistentDataType.LIST.strings(),
+            serialized
+        )
         return 0
     }
 }
