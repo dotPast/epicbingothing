@@ -156,6 +156,120 @@ class CardTask(
         return display
     }
 
+    fun getAnnouncementDisplay(): Component {
+        var display = ItemStack(iconMaterial, iconAmount)
+        val displayMeta = display.itemMeta
+
+        if (type == TYPE.ADVANCEMENTS) {
+            val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
+
+            display = if (advancement != null) {
+                advancement.display!!.icon()
+            } else {
+                ItemStack(Material.EXPERIENCE_BOTTLE, 1)
+            }
+        }
+
+        if (displayName.isEmpty()) {
+            displayName = when (type) {
+                TYPE.ITEM -> {
+                    val plainTextName = PlainTextComponentSerializer.plainText().serialize(display.displayName())
+
+                    if (iconMaterial != Material.getMaterial(id)) {
+                        if (iconAmount == 1) {
+                            when (plainTextName[2]) {
+                                'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' -> "Get a ${
+                                    plainTextName.subSequence(
+                                        1,
+                                        plainTextName.length - 1
+                                    )
+                                }"
+
+                                else -> "Get an ${plainTextName.subSequence(1, plainTextName.length - 1)}"
+                            }
+                        } else {
+                            "Get ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
+                        }
+                    } else {
+                        "Get an Unknown Item"
+                    }
+                }
+
+                TYPE.ADVANCEMENTS -> {
+                    val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
+
+                    if (advancement == null || id == "default") {
+                        "Get an Unknown Advancement"
+                    } else {
+                        val plainTextName = PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
+                        "Get the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" Advancement"
+                    }
+                }
+                TYPE.ODDBALL -> {
+                    "Complete a Missing Task"
+                }
+            }
+        }
+
+        if (description.isEmpty()) {
+            description = when (type) {
+                TYPE.ITEM -> {
+                    val plainTextName = PlainTextComponentSerializer.plainText().serialize(display.displayName())
+
+                    if (iconAmount == 1) {
+                        "Get a single ${plainTextName.subSequence(1, plainTextName.length - 1)}"
+                    } else {
+                        "Get ${iconAmount} ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
+                    }
+                }
+                TYPE.ADVANCEMENTS -> {
+                    val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
+
+                    if (advancement == null || id == "default") {
+                        "Complete an Unknown Advancement. Please check if the task ID is valid"
+                    } else {
+                        val plainTextName = PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
+                        when (advancement.display!!.frame()) {
+                            AdvancementDisplay.Frame.CHALLENGE -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" challenge"
+                            AdvancementDisplay.Frame.GOAL -> "Reach the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" goal"
+                            AdvancementDisplay.Frame.TASK -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" advancement"
+                            else -> "Complete the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" advancement"
+                        }
+                    }
+                }
+                TYPE.ODDBALL -> "Complete a Missing Task. Please check if the task ID is valid."
+            }
+        }
+
+        displayMeta.displayName(
+            Component.text(displayName)
+                .color(TextColor.color(this.difficulty.color))
+        )
+
+        display.setItemMeta(displayMeta)
+
+        display.lore(
+            mutableListOf(
+                Component.text(description).color(TextColor.color(0xffffff)),
+                Component.empty(),
+                Component.text("Type: ").color(TextColor.color(0xffffff))
+                    .append {
+                        Component.text(this.type.displayName)
+                            .color(TextColor.color(this.type.color))
+                    },
+                Component.text("Difficulty: ").color(TextColor.color(0xffffff))
+                    .append {
+                        Component.text(this.difficulty.displayName)
+                            .color(TextColor.color(this.difficulty.color))
+                    },
+                Component.empty(),
+                Component.text("ID: ${this.id}").color(TextColor.color(0x555555))
+            )
+        )
+
+        return display.displayName()
+    }
+
     enum class DIFFICULTY(val displayName: String, val color: TextColor) {
         EASY("Easy", TextColor.color(0x88ff4d)),
         NORMAL("Normal", TextColor.color(0xffbf00)),

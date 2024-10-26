@@ -26,23 +26,9 @@ class AdvancementTaskBehavior(container: PlayerBehaviourContainer): OnlinePlayer
             val rowData = Json.decodeFromString<List<CardTask>>(row)
 
             for (task in rowData) {
-                if (task.type == CardTask.TYPE.ADVANCEMENTS && advancement.key.key == task.id) {
-                    val name = advancement.displayName()
-
-                    when (advancement.display!!.frame()) {
-                        AdvancementDisplay.Frame.CHALLENGE -> {
-                            Bukkit.broadcast(Component.text("${player.name} marked the ").append(name).append(Component.text(" challenge space!")))
-                            task.completed = true
-                        }
-                        AdvancementDisplay.Frame.GOAL -> {
-                            Bukkit.broadcast(Component.text("${player.name} marked the ").append(name).append(Component.text(" goal space!")))
-                            task.completed = true
-                        }
-                        else -> {
-                            Bukkit.broadcast(Component.text("${player.name} marked the ").append(name).append(Component.text(" advancement space!")))
-                            task.completed = true
-                        }
-                    }
+                if (task.type == CardTask.TYPE.ADVANCEMENTS && advancement.key.key == task.id && !task.completed) {
+                    Bukkit.broadcast(Component.text("${player.name} marked the ").append(task.getAnnouncementDisplay()).append(Component.text(" space!")))
+                    task.completed = true
                 }
             }
 
