@@ -11,7 +11,6 @@ import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
-import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataType
 
@@ -50,12 +49,5 @@ class ItemTaskBehavior(container: PlayerBehaviourContainer) : OnlinePlayerBehavi
     @Subscribe
     fun slotChange(event: PlayerInventorySlotChangeEvent) {
         checkItems(event.player, event.newItemStack)
-    }
-
-    @Subscribe
-    fun inventoryClick(event: InventoryClickEvent) {
-        if (event.currentItem != null) {
-            checkItems(event.viewers[0] as Player, event.currentItem!!)
-        }
     }
 }
