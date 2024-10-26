@@ -1,6 +1,8 @@
 package hi.dottt.epicbingothing
 
 import com.mojang.brigadier.context.CommandContext
+import hi.dottt.epicbingothing.commands.AddCardsCommand
+import hi.dottt.epicbingothing.commands.RegisterSceneCommand
 import hi.dottt.epicbingothing.commands.ShowCardCommand
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
@@ -25,6 +27,12 @@ class EBTBootstrap : PluginBootstrap {
             commands!!.register(
                 Commands.literal("addcards").executes { ctx: CommandContext<CommandSourceStack> ->
                     AddCardsCommand().execute(ctx)
+                }.build()
+            )
+
+            commands!!.register(
+                Commands.literal("registerscene").executes { ctx: CommandContext<CommandSourceStack> ->
+                    RegisterSceneCommand().execute(ctx)
                 }.build()
             )
         }
