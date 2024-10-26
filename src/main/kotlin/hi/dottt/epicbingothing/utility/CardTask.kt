@@ -1,6 +1,8 @@
 package hi.dottt.epicbingothing.utility
 
 import io.papermc.paper.advancement.AdvancementDisplay
+import kotlinx.serialization.Contextual
+import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
@@ -9,17 +11,19 @@ import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.inventory.ItemStack
 
+@Serializable
 class CardTask(
     val id: String = "default",
     val type: TYPE = TYPE.ITEM,
     var displayName: String = "",
     var description: String = "",
-    var icon: ItemStack = ItemStack(Material.PAPER),
+    var iconMaterial: Material = Material.DIAMOND,
+    var iconAmount: Int = 1,
     val difficulty: DIFFICULTY = DIFFICULTY.EASY,
-    val completed: Boolean = false
+    var completed: Boolean = false
 ) {
     fun getItemDisplay(): ItemStack {
-        var display = ItemStack(icon)
+        var display = ItemStack(iconMaterial, iconAmount)
         val displayMeta = display.itemMeta
 
         if (type == TYPE.ADVANCEMENTS) {
@@ -35,10 +39,10 @@ class CardTask(
         if (displayName.isEmpty()) {
             displayName = when (type) {
                 TYPE.ITEM -> {
-                    val plainTextName = PlainTextComponentSerializer.plainText().serialize(icon.displayName())
+                    val plainTextName = PlainTextComponentSerializer.plainText().serialize(display.displayName())
 
-                    if (icon.type != Material.getMaterial(id)) {
-                        if (icon.amount == 1) {
+                    if (iconMaterial != Material.getMaterial(id)) {
+                        if (iconAmount == 1) {
                             when (plainTextName[2]) {
                                 'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' -> "Get a ${
                                     plainTextName.subSequence(
@@ -76,12 +80,12 @@ class CardTask(
         if (description.isEmpty()) {
             description = when (type) {
                 TYPE.ITEM -> {
-                    val plainTextName = PlainTextComponentSerializer.plainText().serialize(icon.displayName())
+                    val plainTextName = PlainTextComponentSerializer.plainText().serialize(display.displayName())
 
-                    if (icon.amount == 1) {
+                    if (iconAmount == 1) {
                         "Get a single ${plainTextName.subSequence(1, plainTextName.length - 1)}"
                     } else {
-                        "Get ${icon.amount} ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
+                        "Get ${iconAmount} ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
                     }
                 }
                 TYPE.ADVANCEMENTS -> {
@@ -164,6 +168,10 @@ class CardTask(
         ITEM("Item", TextColor.color(0xffbf00)),
         ADVANCEMENTS("Advancements", TextColor.color(0x88ff4d)),
         ODDBALL("Oddball", TextColor.color(0xc067ff)),
+    }
+
+    fun serialize() {
+
     }
 }
 

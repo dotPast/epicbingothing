@@ -22,6 +22,11 @@ class EBTBootstrap : PluginBootstrap {
                     ShowCardCommand().execute(ctx)
                 }.build()
             )
+            commands!!.register(
+                Commands.literal("addcards").executes { ctx: CommandContext<CommandSourceStack> ->
+                    AddCardsCommand().execute(ctx)
+                }.build()
+            )
         }
     }
 }
