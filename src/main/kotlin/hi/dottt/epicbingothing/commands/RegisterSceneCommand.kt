@@ -6,9 +6,9 @@ import hi.dottt.epicbingothing.scenes.MainGameScene
 import io.papermc.paper.command.brigadier.CommandSourceStack
 
 class RegisterSceneCommand {
-    fun execute(ctx: CommandContext<CommandSourceStack>): Int {
-        Scenes.register(MainGameScene())
+	fun execute(ctx: CommandContext<CommandSourceStack>): Int {
+		Scenes.register(MainGameScene())
 
-        return 0
-    }
+		return 0
+	}
 }

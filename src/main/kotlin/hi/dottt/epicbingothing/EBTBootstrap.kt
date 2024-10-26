@@ -13,28 +13,28 @@ import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents
 
 @Suppress("UnstableApiUsage")
 class EBTBootstrap : PluginBootstrap {
-    override fun bootstrap(context: BootstrapContext) {
-        val manager = context.lifecycleManager
-        manager.registerEventHandler<ReloadableRegistrarEvent<Commands?>>(
-            LifecycleEvents.COMMANDS
-        ) { event: ReloadableRegistrarEvent<Commands?> ->
-            val commands = event.registrar()
-            commands!!.register(
-                Commands.literal("card").executes { ctx: CommandContext<CommandSourceStack> ->
-                    ShowCardCommand().execute(ctx)
-                }.build()
-            )
-            commands!!.register(
-                Commands.literal("addcards").executes { ctx: CommandContext<CommandSourceStack> ->
-                    AddCardsCommand().execute(ctx)
-                }.build()
-            )
+	override fun bootstrap(context: BootstrapContext) {
+		val manager = context.lifecycleManager
+		manager.registerEventHandler<ReloadableRegistrarEvent<Commands?>>(
+			LifecycleEvents.COMMANDS
+		) { event: ReloadableRegistrarEvent<Commands?> ->
+			val commands = event.registrar()!!
+			commands.register(
+				Commands.literal("card").executes { ctx: CommandContext<CommandSourceStack> ->
+					ShowCardCommand().execute(ctx)
+				}.build()
+			)
+			commands.register(
+				Commands.literal("addcards").executes { ctx: CommandContext<CommandSourceStack> ->
+					AddCardsCommand().execute(ctx)
+				}.build()
+			)
 
-            commands!!.register(
-                Commands.literal("registerscene").executes { ctx: CommandContext<CommandSourceStack> ->
-                    RegisterSceneCommand().execute(ctx)
-                }.build()
-            )
-        }
-    }
+			commands.register(
+				Commands.literal("registerscene").executes { ctx: CommandContext<CommandSourceStack> ->
+					RegisterSceneCommand().execute(ctx)
+				}.build()
+			)
+		}
+	}
 }

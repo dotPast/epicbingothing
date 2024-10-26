@@ -8,10 +8,10 @@ import hi.dottt.epicbingothing.behaviors.ItemTaskBehavior
 import org.bukkit.entity.Player
 
 class MainGameScene : OnlineGlobalScene() {
-    override fun setupComponents(player: Player) {
-        player.container.add<AdvancementTaskBehavior>()
-        player.container.add<ItemTaskBehavior>()
-    }
+	override fun setupComponents(player: Player) {
+		player.container.add<AdvancementTaskBehavior>()
+		player.container.add<ItemTaskBehavior>()
+	}
 
-    override fun setupComponents() {}
+	override fun setupComponents() {}
 }
