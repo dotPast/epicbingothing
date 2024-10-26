@@ -4,11 +4,9 @@ import dev.asodesu.origami.engine.player.OnlinePlayerBehaviour
 import dev.asodesu.origami.engine.player.PlayerBehaviourContainer
 import dev.asodesu.origami.engine.wiring.annotations.Subscribe
 import hi.dottt.epicbingothing.utility.CardTask
-import io.papermc.paper.advancement.AdvancementDisplay
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.Bukkit
 import org.bukkit.NamespacedKey
 import org.bukkit.event.player.PlayerAdvancementDoneEvent

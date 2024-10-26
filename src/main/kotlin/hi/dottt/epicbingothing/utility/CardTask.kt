@@ -1,7 +1,6 @@
 package hi.dottt.epicbingothing.utility
 
 import io.papermc.paper.advancement.AdvancementDisplay
-import kotlinx.serialization.Contextual
 import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
