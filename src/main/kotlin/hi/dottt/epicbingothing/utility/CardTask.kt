@@ -4,7 +4,6 @@ import io.papermc.paper.advancement.AdvancementDisplay
 import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
-import net.kyori.adventure.text.serializer.plain.PlainTextComponentSerializer
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -12,13 +11,12 @@ import org.bukkit.inventory.ItemStack
 
 @Serializable
 class CardTask(
-	val id: String = "default",
-	val type: TYPE = TYPE.ITEM,
-	var displayName: String = "",
-	var description: String = "",
+	var id: String = "default",
+	var type: TYPE = TYPE.ITEM,
+	var displayName: Component = Component.text(""),
+	var description: Component = Component.text(""),
 	var iconMaterial: Material = Material.DIAMOND,
 	var iconAmount: Int = 1,
-	val difficulty: DIFFICULTY = DIFFICULTY.EASY,
 	var completed: Boolean = false
 ) {
 	fun getItemDisplay(): ItemStack {
@@ -36,62 +34,37 @@ class CardTask(
 			}
 		}
 
-		if (displayName.isEmpty()) {
+		if (displayName == Component.text("")) {
 			displayName = when (type) {
 				TYPE.ITEM -> {
-					val plainTextName = PlainTextComponentSerializer.plainText().serialize(display.displayName())
-
-					if (iconMaterial != Material.getMaterial(id)) {
-						if (iconAmount == 1) {
-							when (plainTextName[2]) {
-								'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' -> "Get a ${
-									plainTextName.subSequence(
-										1,
-										plainTextName.length - 1
-									)
-								}"
-
-								else -> "Get an ${plainTextName.subSequence(1, plainTextName.length - 1)}"
-							}
-						}
-						else {
-							"Get ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
-						}
-					}
-					else {
-						"Get an Unknown Item"
-					}
+					Component.text("Get ").append(display.displayName())
 				}
 
 				TYPE.ADVANCEMENTS -> {
 					val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
 
 					if (advancement == null || id == "default") {
-						"Get an Unknown Advancement"
+						Component.text("Get an Unknown Advancement")
 					}
 					else {
-						val plainTextName =
-							PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
-						"Get the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" Advancement"
+						Component.text("Get the ").append(advancement.displayName()).append(Component.text(" Advancement"))
 					}
 				}
 
 				TYPE.ODDBALL -> {
-					"Complete a Missing Task"
+					Component.text("Complete a Missing Task")
 				}
 			}
 		}
 
-		if (description.isEmpty()) {
+		if (description == Component.text("")) {
 			description = when (type) {
 				TYPE.ITEM -> {
-					val plainTextName = PlainTextComponentSerializer.plainText().serialize(display.displayName())
-
 					if (iconAmount == 1) {
-						"Get a single ${plainTextName.subSequence(1, plainTextName.length - 1)}"
+						Component.text("Get ").append(display.displayName())
 					}
 					else {
-						"Get ${iconAmount} ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
+						Component.text("Get $iconAmount ").append(display.displayName())
 					}
 				}
 
@@ -99,50 +72,28 @@ class CardTask(
 					val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
 
 					if (advancement == null || id == "default") {
-						"Complete an Unknown Advancement. Please check if the task ID is valid"
+						Component.text("Complete an Unknown Advancement. Please check if the task ID is valid")
 					}
 					else {
-						val plainTextName =
-							PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
 						when (advancement.display !!.frame()) {
-							AdvancementDisplay.Frame.CHALLENGE -> "Complete the \"${
-								plainTextName.subSequence(
-									1,
-									plainTextName.length - 1
-								)
-							}\" challenge"
+							AdvancementDisplay.Frame.CHALLENGE -> Component.text("Complete the ").append(advancement.displayName()).append(Component.text(" challenge"))
 
-							AdvancementDisplay.Frame.GOAL -> "Reach the \"${
-								plainTextName.subSequence(
-									1,
-									plainTextName.length - 1
-								)
-							}\" goal"
+							AdvancementDisplay.Frame.GOAL -> Component.text("Reach the ").append(advancement.displayName()).append(Component.text(" goal"))
 
-							AdvancementDisplay.Frame.TASK -> "Complete the \"${
-								plainTextName.subSequence(
-									1,
-									plainTextName.length - 1
-								)
-							}\" advancement"
+							AdvancementDisplay.Frame.TASK -> Component.text("Get the ").append(advancement.displayName()).append(Component.text(" advancement"))
 
-							else -> "Complete the \"${
-								plainTextName.subSequence(
-									1,
-									plainTextName.length - 1
-								)
-							}\" advancement"
+							else -> Component.text("Get the ").append(advancement.displayName()).append(Component.text(" advancement"))
 						}
 					}
 				}
 
-				TYPE.ODDBALL -> "Complete a Missing Task. Please check if the task ID is valid."
+				TYPE.ODDBALL -> Component.text("Complete a Missing Task. Please check if the task ID is valid.")
 			}
 		}
 
 		displayMeta.displayName(
-			Component.text(displayName)
-				.color(TextColor.color(this.difficulty.color))
+			displayName
+				.color(TextColor.color(this.type.color))
 				.append(
 					Component.text(" - ").color(TextColor.color(0xffffff))
 				)
@@ -172,17 +123,12 @@ class CardTask(
 
 		display.lore(
 			mutableListOf(
-				Component.text(description).color(TextColor.color(0xffffff)),
+				description.color(TextColor.color(0xffffff)),
 				Component.empty(),
 				Component.text("Type: ").color(TextColor.color(0xffffff))
 					.append {
 						Component.text(this.type.displayName)
 							.color(TextColor.color(this.type.color))
-					},
-				Component.text("Difficulty: ").color(TextColor.color(0xffffff))
-					.append {
-						Component.text(this.difficulty.displayName)
-							.color(TextColor.color(this.difficulty.color))
 					},
 				Component.empty(),
 				Component.text("ID: ${this.id}").color(TextColor.color(0x555555))
@@ -207,62 +153,37 @@ class CardTask(
 			}
 		}
 
-		if (displayName.isEmpty()) {
+		if (displayName == Component.text("")) {
 			displayName = when (type) {
 				TYPE.ITEM -> {
-					val plainTextName = PlainTextComponentSerializer.plainText().serialize(display.displayName())
-
-					if (iconMaterial != Material.getMaterial(id)) {
-						if (iconAmount == 1) {
-							when (plainTextName[2]) {
-								'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U' -> "Get a ${
-									plainTextName.subSequence(
-										1,
-										plainTextName.length - 1
-									)
-								}"
-
-								else -> "Get an ${plainTextName.subSequence(1, plainTextName.length - 1)}"
-							}
-						}
-						else {
-							"Get ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
-						}
-					}
-					else {
-						"Get an Unknown Item"
-					}
+					Component.text("Get ").append(display.displayName())
 				}
 
 				TYPE.ADVANCEMENTS -> {
 					val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
 
 					if (advancement == null || id == "default") {
-						"Get an Unknown Advancement"
+						Component.text("Get an Unknown Advancement")
 					}
 					else {
-						val plainTextName =
-							PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
-						"Get the \"${plainTextName.subSequence(1, plainTextName.length - 1)}\" Advancement"
+						Component.text("Get the ").append(advancement.displayName()).append(Component.text(" Advancement"))
 					}
 				}
 
 				TYPE.ODDBALL -> {
-					"Complete a Missing Task"
+					Component.text("Complete a Missing Task")
 				}
 			}
 		}
 
-		if (description.isEmpty()) {
+		if (description == Component.text("")) {
 			description = when (type) {
 				TYPE.ITEM -> {
-					val plainTextName = PlainTextComponentSerializer.plainText().serialize(display.displayName())
-
 					if (iconAmount == 1) {
-						"Get a single ${plainTextName.subSequence(1, plainTextName.length - 1)}"
+						Component.text("Get ").append(display.displayName())
 					}
 					else {
-						"Get ${iconAmount} ${plainTextName.subSequence(1, plainTextName.length - 1)}s"
+						Component.text("Get $iconAmount ").append(display.displayName())
 					}
 				}
 
@@ -270,67 +191,39 @@ class CardTask(
 					val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
 
 					if (advancement == null || id == "default") {
-						"Complete an Unknown Advancement. Please check if the task ID is valid"
+						Component.text("Complete an Unknown Advancement. Please check if the task ID is valid")
 					}
 					else {
-						val plainTextName =
-							PlainTextComponentSerializer.plainText().serialize(advancement.displayName())
 						when (advancement.display !!.frame()) {
-							AdvancementDisplay.Frame.CHALLENGE -> "Complete the \"${
-								plainTextName.subSequence(
-									1,
-									plainTextName.length - 1
-								)
-							}\" challenge"
+							AdvancementDisplay.Frame.CHALLENGE -> Component.text("Complete the ").append(advancement.displayName()).append(Component.text(" challenge"))
 
-							AdvancementDisplay.Frame.GOAL -> "Reach the \"${
-								plainTextName.subSequence(
-									1,
-									plainTextName.length - 1
-								)
-							}\" goal"
+							AdvancementDisplay.Frame.GOAL -> Component.text("Reach the ").append(advancement.displayName()).append(Component.text(" goal"))
 
-							AdvancementDisplay.Frame.TASK -> "Complete the \"${
-								plainTextName.subSequence(
-									1,
-									plainTextName.length - 1
-								)
-							}\" advancement"
+							AdvancementDisplay.Frame.TASK -> Component.text("Get the ").append(advancement.displayName()).append(Component.text(" advancement"))
 
-							else -> "Complete the \"${
-								plainTextName.subSequence(
-									1,
-									plainTextName.length - 1
-								)
-							}\" advancement"
+							else -> Component.text("Get the ").append(advancement.displayName()).append(Component.text(" advancement"))
 						}
 					}
 				}
 
-				TYPE.ODDBALL -> "Complete a Missing Task. Please check if the task ID is valid."
+				TYPE.ODDBALL -> Component.text("Complete a Missing Task. Please check if the task ID is valid.")
 			}
 		}
 
 		displayMeta.displayName(
-			Component.text(displayName)
-				.color(TextColor.color(this.difficulty.color))
+			displayName.color(TextColor.color(this.type.color))
 		)
 
 		display.setItemMeta(displayMeta)
 
 		display.lore(
 			mutableListOf(
-				Component.text(description).color(TextColor.color(0xffffff)),
+				description.color(TextColor.color(0xffffff)),
 				Component.empty(),
 				Component.text("Type: ").color(TextColor.color(0xffffff))
 					.append {
 						Component.text(this.type.displayName)
 							.color(TextColor.color(this.type.color))
-					},
-				Component.text("Difficulty: ").color(TextColor.color(0xffffff))
-					.append {
-						Component.text(this.difficulty.displayName)
-							.color(TextColor.color(this.difficulty.color))
 					},
 				Component.empty(),
 				Component.text("ID: ${this.id}").color(TextColor.color(0x555555))
