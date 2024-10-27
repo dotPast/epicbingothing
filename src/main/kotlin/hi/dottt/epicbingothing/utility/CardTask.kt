@@ -368,7 +368,11 @@ class CardTask(
 							Material.FROGSPAWN,
 							Material.BOGGED_SPAWN_EGG,
 							Material.BREEZE_SPAWN_EGG,
-							Material.CAMEL_SPAWN_EGG
+							Material.CAMEL_SPAWN_EGG,
+							Material.POTION,
+							Material.SPLASH_POTION,
+							Material.LINGERING_POTION,
+							Material.TIPPED_ARROW
 						)
 
 						while (itemMaterial == null) {
