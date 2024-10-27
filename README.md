@@ -9,13 +9,13 @@ Yet Another Bingo Plugin.
 - [x] Adding cards to player's container
 - [x] Item tasks
 - [x] Advancement tasks
-- [ ] Oddball tasks
 - [ ] Game loop
 - [ ] Bingo detection
 
 ### for v0.1+
 - [ ] Custom tasks
 - [ ] More game modes
+- [ ] Oddball tasks
 - [ ] Config screen for predefining cards
 - [ ] Cards displayed in maps
 - [ ] and more
