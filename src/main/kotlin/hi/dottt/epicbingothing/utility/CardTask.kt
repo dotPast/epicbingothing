@@ -340,11 +340,151 @@ class CardTask(
 		return display.displayName()
 	}
 
-	enum class DIFFICULTY(val displayName: String, val color: TextColor) {
-		EASY("Easy", TextColor.color(0x88ff4d)),
-		NORMAL("Normal", TextColor.color(0xffbf00)),
-		HARD("Hard", TextColor.color(0xff4040)),
-		GOOD_LUCK_GETTING_THIS_ONE("Good Luck Getting This One", TextColor.color(0xc067ff))
+	fun generateCard(): MutableList<MutableList<CardTask>> {
+		val card =
+			mutableListOf(mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf(), mutableListOf<CardTask>())
+
+		for (row in 0..4) {
+			for (column in 0..4) {
+				val task = CardTask()
+				val cardType = listOf(TYPE.ITEM, TYPE.ITEM, TYPE.ADVANCEMENTS).random()
+				task.type = cardType
+
+				when (cardType) {
+					TYPE.ITEM -> {
+						val stackSize = listOf(1, 8, 16, 32, 64).random()
+						var itemMaterial: Material? = null
+
+						val unobtainableItems = listOf(
+							Material.BEDROCK,
+							Material.BUDDING_AMETHYST,
+							Material.PETRIFIED_OAK_SLAB,
+							Material.CHORUS_PLANT,
+							Material.SPAWNER,
+							Material.FARMLAND,
+							Material.INFESTED_STONE,
+							Material.INFESTED_COBBLESTONE,
+							Material.INFESTED_STONE_BRICKS,
+							Material.INFESTED_MOSSY_STONE_BRICKS,
+							Material.INFESTED_CRACKED_STONE_BRICKS,
+							Material.INFESTED_CHISELED_STONE_BRICKS,
+							Material.INFESTED_DEEPSLATE,
+							Material.REINFORCED_DEEPSLATE,
+							Material.END_PORTAL_FRAME,
+							Material.COMMAND_BLOCK,
+							Material.BARRIER,
+							Material.LIGHT,
+							Material.DIRT_PATH,
+							Material.REPEATING_COMMAND_BLOCK,
+							Material.CHAIN_COMMAND_BLOCK,
+							Material.STRUCTURE_VOID,
+							Material.STRUCTURE_BLOCK,
+							Material.JIGSAW,
+							Material.BUNDLE,
+							Material.ALLAY_SPAWN_EGG,
+							Material.AXOLOTL_SPAWN_EGG,
+							Material.BAT_SPAWN_EGG,
+							Material.BEE_SPAWN_EGG,
+							Material.BLAZE_SPAWN_EGG,
+							Material.CAT_SPAWN_EGG,
+							Material.CAVE_SPIDER_SPAWN_EGG,
+							Material.CHICKEN_SPAWN_EGG,
+							Material.COD_SPAWN_EGG,
+							Material.COW_SPAWN_EGG,
+							Material.CREEPER_SPAWN_EGG,
+							Material.DOLPHIN_SPAWN_EGG,
+							Material.DONKEY_SPAWN_EGG,
+							Material.DROWNED_SPAWN_EGG,
+							Material.ELDER_GUARDIAN_SPAWN_EGG,
+							Material.ENDERMAN_SPAWN_EGG,
+							Material.ENDERMITE_SPAWN_EGG,
+							Material.EVOKER_SPAWN_EGG,
+							Material.FOX_SPAWN_EGG,
+							Material.FROG_SPAWN_EGG,
+							Material.GHAST_SPAWN_EGG,
+							Material.GLOW_SQUID_SPAWN_EGG,
+							Material.GOAT_SPAWN_EGG,
+							Material.GUARDIAN_SPAWN_EGG,
+							Material.HOGLIN_SPAWN_EGG,
+							Material.HORSE_SPAWN_EGG,
+							Material.HUSK_SPAWN_EGG,
+							Material.LLAMA_SPAWN_EGG,
+							Material.MAGMA_CUBE_SPAWN_EGG,
+							Material.MOOSHROOM_SPAWN_EGG,
+							Material.MULE_SPAWN_EGG,
+							Material.OCELOT_SPAWN_EGG,
+							Material.PANDA_SPAWN_EGG,
+							Material.PARROT_SPAWN_EGG,
+							Material.PHANTOM_SPAWN_EGG,
+							Material.PIG_SPAWN_EGG,
+							Material.PIGLIN_SPAWN_EGG,
+							Material.PIGLIN_BRUTE_SPAWN_EGG,
+							Material.PILLAGER_SPAWN_EGG,
+							Material.POLAR_BEAR_SPAWN_EGG,
+							Material.PUFFERFISH_SPAWN_EGG,
+							Material.RABBIT_SPAWN_EGG,
+							Material.RAVAGER_SPAWN_EGG,
+							Material.SALMON_SPAWN_EGG,
+							Material.SHEEP_SPAWN_EGG,
+							Material.SHULKER_SPAWN_EGG,
+							Material.SILVERFISH_SPAWN_EGG,
+							Material.SKELETON_SPAWN_EGG,
+							Material.SKELETON_HORSE_SPAWN_EGG,
+							Material.SLIME_SPAWN_EGG,
+							Material.SPIDER_SPAWN_EGG,
+							Material.SQUID_SPAWN_EGG,
+							Material.STRAY_SPAWN_EGG,
+							Material.STRIDER_SPAWN_EGG,
+							Material.TADPOLE_SPAWN_EGG,
+							Material.TRADER_LLAMA_SPAWN_EGG,
+							Material.TROPICAL_FISH_SPAWN_EGG,
+							Material.TURTLE_SPAWN_EGG,
+							Material.VEX_SPAWN_EGG,
+							Material.VILLAGER_SPAWN_EGG,
+							Material.VINDICATOR_SPAWN_EGG,
+							Material.WANDERING_TRADER_SPAWN_EGG,
+							Material.WARDEN_SPAWN_EGG,
+							Material.WITCH_SPAWN_EGG,
+							Material.WITHER_SKELETON_SPAWN_EGG,
+							Material.WOLF_SPAWN_EGG,
+							Material.ZOGLIN_SPAWN_EGG,
+							Material.ZOMBIE_SPAWN_EGG,
+							Material.ZOMBIE_HORSE_SPAWN_EGG,
+							Material.ZOMBIE_VILLAGER_SPAWN_EGG,
+							Material.ZOMBIFIED_PIGLIN_SPAWN_EGG,
+							Material.PLAYER_HEAD,
+							Material.COMMAND_BLOCK_MINECART,
+							Material.KNOWLEDGE_BOOK,
+							Material.DEBUG_STICK,
+							Material.FROGSPAWN
+						)
+
+						while (itemMaterial == null) {
+							itemMaterial = Material.entries.random()
+
+							if (unobtainableItems.contains(itemMaterial) || ! itemMaterial.isItem) {
+								itemMaterial = null
+							}
+						}
+
+						task.iconMaterial = itemMaterial
+						task.iconAmount = stackSize
+
+
+					}
+
+					TYPE.ADVANCEMENTS -> {
+						task.id = "adventure/overoverkill"
+					}
+
+					TYPE.ODDBALL -> {}
+				}
+
+				card[row].add(task)
+			}
+		}
+
+		return card
 	}
 
 	enum class TYPE(val displayName: String, val color: TextColor) {
