@@ -354,13 +354,16 @@ class CardTask(
 							Material.COMMAND_BLOCK_MINECART,
 							Material.KNOWLEDGE_BOOK,
 							Material.DEBUG_STICK,
-							Material.FROGSPAWN
+							Material.FROGSPAWN,
+							Material.BOGGED_SPAWN_EGG,
+							Material.BREEZE_SPAWN_EGG,
+							Material.CAMEL_SPAWN_EGG
 						)
 
 						while (itemMaterial == null) {
 							itemMaterial = Material.entries.random()
 
-							if (unobtainableItems.contains(itemMaterial) || ! itemMaterial.isItem) {
+							if (unobtainableItems.contains(itemMaterial) || ! itemMaterial.isItem || itemMaterial.creativeCategory == null) {
 								itemMaterial = null
 							}
 						}
