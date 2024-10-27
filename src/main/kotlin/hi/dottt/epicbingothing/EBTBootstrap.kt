@@ -2,8 +2,8 @@ package hi.dottt.epicbingothing
 
 import com.mojang.brigadier.context.CommandContext
 import hi.dottt.epicbingothing.commands.AddCardsCommand
-import hi.dottt.epicbingothing.commands.RegisterSceneCommand
 import hi.dottt.epicbingothing.commands.ShowCardCommand
+import hi.dottt.epicbingothing.commands.StartGameCommand
 import io.papermc.paper.command.brigadier.CommandSourceStack
 import io.papermc.paper.command.brigadier.Commands
 import io.papermc.paper.plugin.bootstrap.BootstrapContext
@@ -18,7 +18,7 @@ class EBTBootstrap : PluginBootstrap {
 		manager.registerEventHandler<ReloadableRegistrarEvent<Commands?>>(
 			LifecycleEvents.COMMANDS
 		) { event: ReloadableRegistrarEvent<Commands?> ->
-			val commands = event.registrar()!!
+			val commands = event.registrar() !!
 			commands.register(
 				Commands.literal("card").executes { ctx: CommandContext<CommandSourceStack> ->
 					ShowCardCommand().execute(ctx)
@@ -31,8 +31,8 @@ class EBTBootstrap : PluginBootstrap {
 			)
 
 			commands.register(
-				Commands.literal("registerscene").executes { ctx: CommandContext<CommandSourceStack> ->
-					RegisterSceneCommand().execute(ctx)
+				Commands.literal("startgame").executes { ctx: CommandContext<CommandSourceStack> ->
+					StartGameCommand().execute(ctx)
 				}.build()
 			)
 		}
