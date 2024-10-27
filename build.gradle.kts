@@ -29,7 +29,7 @@ dependencies {
 
     implementation("com.noxcrew.interfaces:interfaces:1.3.1-SNAPSHOT")
 
-    implementation("net.kyori:adventure-text-serializer-plain:4.17.0")
+    implementation("net.kyori:adventure-text-minimessage:4.17.0")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3")
 }
