@@ -15,6 +15,8 @@ Yet Another Bingo Plugin.
 
 ### for v0.1+
 - [ ] Custom tasks
+- [ ] More game modes
+- [ ] Config screen for predefining cards
 - [ ] Cards displayed in maps
 - [ ] and more
 
