@@ -4,6 +4,7 @@ import io.papermc.paper.advancement.AdvancementDisplay
 import kotlinx.serialization.Serializable
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -14,8 +15,8 @@ import org.bukkit.inventory.ItemStack
 class CardTask(
 	var id: String = "default",
 	var type: TYPE = TYPE.ITEM,
-	var displayName: Component = Component.text(""),
-	var description: Component = Component.text(""),
+	var displayName: String = "",
+	var description: String = "",
 	var iconMaterial: Material = Material.DIAMOND,
 	var iconAmount: Int = 1,
 	var completed: Boolean = false
@@ -23,6 +24,11 @@ class CardTask(
 	fun getItemDisplay(): ItemStack {
 		var display = ItemStack(iconMaterial, iconAmount)
 		val displayMeta = display.itemMeta
+
+		val mm = MiniMessage.miniMessage()
+
+		var deserializedDisplayName = mm.deserialize(displayName)
+		var deserializedDescription = mm.deserialize(description)
 
 		if (type == TYPE.ADVANCEMENTS) {
 			val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
@@ -35,8 +41,8 @@ class CardTask(
 			}
 		}
 
-		if (displayName == Component.text("")) {
-			displayName = when (type) {
+		if (deserializedDisplayName == Component.text("")) {
+			deserializedDisplayName = when (type) {
 				TYPE.ITEM -> {
 					Component.text("Get ").append(display.displayName())
 				}
@@ -58,8 +64,8 @@ class CardTask(
 			}
 		}
 
-		if (description == Component.text("")) {
-			description = when (type) {
+		if (deserializedDescription == Component.text("")) {
+			deserializedDescription = when (type) {
 				TYPE.ITEM -> {
 					if (iconAmount == 1) {
 						Component.text("Get ").append(display.displayName())
@@ -93,7 +99,7 @@ class CardTask(
 		}
 
 		displayMeta.displayName(
-			displayName
+			deserializedDisplayName
 				.color(TextColor.color(this.type.color))
 				.append(
 					Component.text(" - ").color(TextColor.color(0xffffff))
@@ -124,7 +130,7 @@ class CardTask(
 
 		display.lore(
 			mutableListOf(
-				description.color(TextColor.color(0xffffff)),
+				deserializedDescription.color(TextColor.color(0xffffff)),
 				if (this.type == TYPE.ADVANCEMENTS) {
 					Component.text("( ").append(Bukkit.getAdvancement(NamespacedKey.minecraft(id))!!.display!!.description()).append(Component.text(" )"))
 				} else {
@@ -132,7 +138,7 @@ class CardTask(
 				},
 				Component.text("Type: ").color(TextColor.color(0xffffff))
 					.append {
-						Component.text(this.type.displayName)
+						Component.text(this.type.deserializedDisplayName)
 							.color(TextColor.color(this.type.color))
 					},
 				Component.empty(),
@@ -147,6 +153,11 @@ class CardTask(
 		var display = ItemStack(iconMaterial, iconAmount)
 		val displayMeta = display.itemMeta
 
+		val mm = MiniMessage.miniMessage()
+
+		var deserializedDisplayName = mm.deserialize(displayName)
+		var deserializedDescription = mm.deserialize(description)
+
 		if (type == TYPE.ADVANCEMENTS) {
 			val advancement = Bukkit.getAdvancement(NamespacedKey.minecraft(id))
 
@@ -158,8 +169,8 @@ class CardTask(
 			}
 		}
 
-		if (displayName == Component.text("")) {
-			displayName = when (type) {
+		if (deserializedDisplayName == Component.text("")) {
+			deserializedDisplayName = when (type) {
 				TYPE.ITEM -> {
 					Component.text("Get ").append(display.displayName())
 				}
@@ -181,8 +192,8 @@ class CardTask(
 			}
 		}
 
-		if (description == Component.text("")) {
-			description = when (type) {
+		if (deserializedDescription == Component.text("")) {
+			deserializedDescription = when (type) {
 				TYPE.ITEM -> {
 					if (iconAmount == 1) {
 						Component.text("Get ").append(display.displayName())
@@ -216,18 +227,18 @@ class CardTask(
 		}
 
 		displayMeta.displayName(
-			displayName.color(TextColor.color(this.type.color))
+			deserializedDisplayName.color(TextColor.color(this.type.color))
 		)
 
 		display.setItemMeta(displayMeta)
 
 		display.lore(
 			mutableListOf(
-				description.color(TextColor.color(0xffffff)),
+				deserializedDescription.color(TextColor.color(0xffffff)),
 				Component.empty(),
 				Component.text("Type: ").color(TextColor.color(0xffffff))
 					.append {
-						Component.text(this.type.displayName)
+						Component.text(this.type.deserializedDisplayName)
 							.color(TextColor.color(this.type.color))
 					},
 				Component.empty(),
@@ -400,7 +411,7 @@ class CardTask(
 		return card
 	}
 
-	enum class TYPE(val displayName: String, val color: TextColor) {
+	enum class TYPE(val deserializedDisplayName: String, val color: TextColor) {
 		ITEM("Item", TextColor.color(0xffbf00)),
 		ADVANCEMENTS("Advancements", TextColor.color(0x88ff4d)),
 		ODDBALL("Oddball", TextColor.color(0xc067ff)),
