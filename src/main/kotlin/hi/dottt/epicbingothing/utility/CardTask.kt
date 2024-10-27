@@ -7,6 +7,7 @@ import net.kyori.adventure.text.format.TextColor
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
+import org.bukkit.advancement.Advancement
 import org.bukkit.inventory.ItemStack
 
 @Serializable
@@ -124,7 +125,11 @@ class CardTask(
 		display.lore(
 			mutableListOf(
 				description.color(TextColor.color(0xffffff)),
-				Component.empty(),
+				if (this.type == TYPE.ADVANCEMENTS) {
+					Component.text("( ").append(Bukkit.getAdvancement(NamespacedKey.minecraft(id))!!.display!!.description()).append(Component.text(" )"))
+				} else {
+					Component.empty()
+				},
 				Component.text("Type: ").color(TextColor.color(0xffffff))
 					.append {
 						Component.text(this.type.displayName)
@@ -367,7 +372,19 @@ class CardTask(
 					}
 
 					TYPE.ADVANCEMENTS -> {
-						task.id = "adventure/overoverkill"
+						val advancements: MutableList<Advancement> = mutableListOf()
+
+						Bukkit.advancementIterator().forEach {
+							advancement -> advancements.add(advancement)
+						}
+
+						while (task.id == "default") {
+							val pickedAdvancement = advancements.random()
+
+							if (pickedAdvancement.key.key.split("/")[0] != "recipes") {
+								task.id = pickedAdvancement.key.key
+							}
+						}
 					}
 
 					TYPE.ODDBALL -> {}
