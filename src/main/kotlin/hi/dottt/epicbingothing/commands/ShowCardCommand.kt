@@ -16,32 +16,36 @@ import org.bukkit.entity.Player
 import org.bukkit.persistence.PersistentDataType
 
 class ShowCardCommand {
-	fun execute(ctx: CommandContext<CommandSourceStack>): Int {
-		val cardUI = buildChestInterface {
-			rows = 6
-			initialTitle = Component.text("Bingo Card")
+    fun execute(ctx: CommandContext<CommandSourceStack>): Int {
+        val cardUI =
+            buildChestInterface {
+                rows = 6
+                initialTitle = Component.text("Bingo Card")
 
-			val player = ctx.source.sender as Player
+                val player = ctx.source.sender as Player
 
-			val rawCards =
-				player.persistentDataContainer.get(NamespacedKey("bingo", "rows"), PersistentDataType.LIST.strings())
-			val items: MutableList<List<CardTask>> = mutableListOf()
+                val rawCards =
+                    player.persistentDataContainer.get(
+                        NamespacedKey("bingo", "rows"),
+                        PersistentDataType.LIST.strings()
+                    )
+                val items: MutableList<List<CardTask>> = mutableListOf()
 
-			for (row in rawCards) {
-				val rowData = Json.decodeFromString<List<CardTask>>(row)
+                for (row in rawCards) {
+                    val rowData = Json.decodeFromString<List<CardTask>>(row)
 
-				items.add(rowData)
-			}
+                    items.add(rowData)
+                }
 
-			withTransform { pane, _ ->
-				forEachInGrid(5, 5) { row, column ->
-					pane[row + 1, column + 2] = StaticElement(drawable(items[row][column].getItemDisplay()))
-				}
-			}
-		}
+                withTransform { pane, _ ->
+                    forEachInGrid(5, 5) { row, column ->
+                        pane[row + 1, column + 2] = StaticElement(drawable(items[row][column].getItemDisplay()))
+                    }
+                }
+            }
 
-		runBlocking { launch { cardUI.open(ctx.source.sender as Player) } }
+        runBlocking { launch { cardUI.open(ctx.source.sender as Player) } }
 
-		return 0
-	}
+        return 0
+    }
 }

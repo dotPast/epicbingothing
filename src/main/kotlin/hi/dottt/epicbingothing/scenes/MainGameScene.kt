@@ -7,11 +7,13 @@ import hi.dottt.epicbingothing.behaviors.AdvancementTaskBehavior
 import hi.dottt.epicbingothing.behaviors.ItemTaskBehavior
 import org.bukkit.OfflinePlayer
 
-class MainGameScene(id: String) : OfflinePlayerScene(id) {
-	override fun setupComponents(player: OfflinePlayer) {
-		player.container.add<AdvancementTaskBehavior>()
-		player.container.add<ItemTaskBehavior>()
-	}
+class MainGameScene(
+    id: String,
+) : OfflinePlayerScene(id) {
+    override fun setupComponents(player: OfflinePlayer) {
+        player.container.add<AdvancementTaskBehavior>()
+        player.container.add<ItemTaskBehavior>()
+    }
 
-	override fun setupComponents() {}
+    override fun setupComponents() {}
 }

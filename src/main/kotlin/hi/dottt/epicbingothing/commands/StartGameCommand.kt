@@ -9,17 +9,15 @@ import org.bukkit.Bukkit
 import org.bukkit.OfflinePlayer
 
 class StartGameCommand {
-	fun execute(ctx: CommandContext<CommandSourceStack>): Int {
-		Scenes.register(MainGameScene("game"))
+    fun execute(ctx: CommandContext<CommandSourceStack>): Int {
+        Scenes.register(MainGameScene("game"))
 
-		val scene = Scenes.map["game"] as PlayerScene<OfflinePlayer>
+        val scene = Scenes.map["game"] as PlayerScene<OfflinePlayer>
 
-		for (player in Bukkit.getOnlinePlayers()) {
-			scene.addPlayer(player)
+        for (player in Bukkit.getOnlinePlayers()) {
+            scene.addPlayer(player)
+        }
 
-
-		}
-
-		return 0
-	}
+        return 0
+    }
 }

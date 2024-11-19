@@ -10,27 +10,27 @@ import org.bukkit.entity.Player
 import org.bukkit.persistence.PersistentDataType
 
 class AddCardsCommand {
-	fun execute(ctx: CommandContext<CommandSourceStack>): Int {
-		if (ctx.source.sender !is Player) {
-			ctx.source.sender.sendPlainMessage("Sender is not a player.")
-			return 0
-		}
+    fun execute(ctx: CommandContext<CommandSourceStack>): Int {
+        if (ctx.source.sender !is Player) {
+            ctx.source.sender.sendPlainMessage("Sender is not a player.")
+            return 0
+        }
 
-		val player = ctx.source.sender as Player
+        val player = ctx.source.sender as Player
 
-		val cards = CardTask().generateCard()
+        val cards = CardTask().generateCard()
 
-		val serialized = mutableListOf<String>()
+        val serialized = mutableListOf<String>()
 
-		for (row in cards) {
-			serialized.add(Json.encodeToString(row))
-		}
+        for (row in cards) {
+            serialized.add(Json.encodeToString(row))
+        }
 
-		player.persistentDataContainer.set(
-			NamespacedKey("bingo", "rows"),
-			PersistentDataType.LIST.strings(),
-			serialized
-		)
-		return 0
-	}
+        player.persistentDataContainer.set(
+            NamespacedKey("bingo", "rows"),
+            PersistentDataType.LIST.strings(),
+            serialized,
+        )
+        return 0
+    }
 }

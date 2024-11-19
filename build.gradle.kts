@@ -38,7 +38,6 @@ kotlin {
     jvmToolchain(21)
 }
 
-
 tasks {
     runServer {
         minecraftVersion("1.21.1")
