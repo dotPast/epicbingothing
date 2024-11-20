@@ -8,27 +8,26 @@ import net.kyori.adventure.text.minimessage.MiniMessage
 import org.bukkit.Bukkit
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
-import org.bukkit.advancement.Advancement
 import org.bukkit.inventory.ItemStack
 
 @Serializable
 class CardTask(
     var id: String = "default",
+    var amount: Int = 1,
     var type: TYPE = TYPE.ITEM,
     var displayName: String = "",
     var description: String = "",
     var iconMaterial: Material = Material.DIAMOND,
-    var iconAmount: Int = 1,
     var completed: Boolean = false,
 ) {
     fun getItemDisplay(): ItemStack {
-        var display = ItemStack(iconMaterial, iconAmount)
+        var display = ItemStack(iconMaterial, amount)
 
         if (type == TYPE.ITEM) {
             val itemMaterial = Material.getMaterial(id.uppercase())
 
             if (itemMaterial != null) {
-                display = ItemStack(itemMaterial, iconAmount)
+                display = ItemStack(itemMaterial, amount)
             }
         }
 
@@ -80,10 +79,10 @@ class CardTask(
             deserializedDescription =
                 when (type) {
                     TYPE.ITEM -> {
-                        if (iconAmount == 1) {
+                        if (amount == 1) {
                             Component.text("Get ").append(display.displayName())
                         } else {
-                            Component.text("Get $iconAmount ").append(display.displayName())
+                            Component.text("Get $amount ").append(display.displayName())
                         }
                     }
 
@@ -234,10 +233,10 @@ class CardTask(
             deserializedDescription =
                 when (type) {
                     TYPE.ITEM -> {
-                        if (iconAmount == 1) {
+                        if (amount == 1) {
                             Component.text("Get ").append(display.displayName())
                         } else {
-                            Component.text("Get $iconAmount ").append(display.displayName())
+                            Component.text("Get $amount ").append(display.displayName())
                         }
                     }
 

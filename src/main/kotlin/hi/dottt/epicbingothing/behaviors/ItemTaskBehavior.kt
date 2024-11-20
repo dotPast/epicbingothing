@@ -9,6 +9,7 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import net.kyori.adventure.text.Component
 import org.bukkit.Bukkit
+import org.bukkit.Material
 import org.bukkit.NamespacedKey
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -32,10 +33,10 @@ class ItemTaskBehavior(
             for (task in rowData) {
                 if (task.type == CardTask.TYPE.ITEM && !task.completed) {
                     if (player.inventory.contains(
-                            task.iconMaterial,
-                            task.iconAmount,
+                            Material.getMaterial(task.id.uppercase())!!,
+                            task.amount,
                         ) ||
-                        (item.type == task.iconMaterial && item.amount >= task.iconAmount)
+                        (item.type == Material.getMaterial(task.id.uppercase())!! && item.amount >= task.amount)
                     ) {
                         Bukkit.broadcast(
                             Component
