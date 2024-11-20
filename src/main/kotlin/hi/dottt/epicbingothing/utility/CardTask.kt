@@ -184,7 +184,16 @@ class CardTask(
     }
 
     fun getAnnouncementDisplay(): Component {
-        var display = ItemStack(iconMaterial, iconAmount)
+        var display = ItemStack(iconMaterial, amount)
+
+        if (type == TYPE.ITEM) {
+            val itemMaterial = Material.getMaterial(id.uppercase())
+
+            if (itemMaterial != null) {
+                display = ItemStack(itemMaterial, amount)
+            }
+        }
+
         val displayMeta = display.itemMeta
 
         val mm = MiniMessage.miniMessage()
