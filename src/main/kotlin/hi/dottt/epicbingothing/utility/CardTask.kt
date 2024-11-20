@@ -23,6 +23,15 @@ class CardTask(
 ) {
     fun getItemDisplay(): ItemStack {
         var display = ItemStack(iconMaterial, iconAmount)
+
+        if (type == TYPE.ITEM) {
+            val itemMaterial = Material.getMaterial(id.uppercase())
+
+            if (itemMaterial != null) {
+                display = ItemStack(itemMaterial, iconAmount)
+            }
+        }
+
         val displayMeta = display.itemMeta
 
         val mm = MiniMessage.miniMessage()
