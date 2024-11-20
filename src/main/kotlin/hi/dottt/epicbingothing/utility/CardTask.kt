@@ -153,6 +153,10 @@ class CardTask(
                 ),
         )
 
+        if (completed) {
+            display = ItemStack(Material.LIME_CONCRETE, 1)
+        }
+
         display.setItemMeta(displayMeta)
 
         display.lore(
